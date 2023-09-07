@@ -9,6 +9,8 @@ class Category(models.Model):
         return self.title
 
     class Meta:
+        verbose_name = 'Категория(ю)'
+        verbose_name_plural = 'Категории'
         ordering = ['title']
 
 
@@ -20,6 +22,8 @@ class Tag(models.Model):
         return self.title
 
     class Meta:
+        verbose_name = 'Тег'
+        verbose_name_plural = 'Теги'
         ordering = ['title']
 
 
@@ -30,7 +34,7 @@ class Post(models.Model):
     content = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Опубликовано')
     photo = models.ImageField(upload_to='photos', blank=True)
-    view = models.IntegerField(default=0, verbose_name='Количество просмотров')
+    views = models.IntegerField(default=0, verbose_name='Количество просмотров')
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='posts')
     tags = models.ManyToManyField(Tag, blank=True, related_name='posts')
 
@@ -38,4 +42,6 @@ class Post(models.Model):
         return self.title
 
     class Meta:
-        ordering = ['created_at']
+        verbose_name = 'Статья(ю)'
+        verbose_name_plural = 'Статьи'
+        ordering = ['-created_at']
